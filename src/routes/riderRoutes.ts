@@ -4,17 +4,18 @@ import { PrismaClient } from "@prisma/client";
 const router = Router();
 const prisma = new PrismaClient();
 
-// create user
+// create rider
 router.post("/", async (req, res) => {
-  const { email, name, username } = req.body;
-  console.log(email, name, username);
+  const { email, name, username, password } = req.body;
+  console.log(email, name, username, password);
 
   try {
-    const result = await prisma.user.create({
+    const result = await prisma.rider.create({
       data: {
         email,
         name,
         username,
+        password,
       },
     });
     res.json(result);
@@ -25,7 +26,7 @@ router.post("/", async (req, res) => {
 
 // list users
 router.get("/", async (req, res) => {
-  const allUser = await prisma.user.findMany();
+  const allUser = await prisma.rider.findMany();
   res.json(allUser);
 });
 

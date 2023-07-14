@@ -10,9 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Rider {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
   email    String @unique
   name     String
   username String
+  password String
+  rides    Ride[]
+}
+
+model Ride {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  rider       Rider  @relation(fields: [riderEmail], references: [email])
+  riderEmail  String
+  source      String
+  destination String
 }
