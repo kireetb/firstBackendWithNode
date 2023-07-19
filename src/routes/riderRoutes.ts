@@ -25,24 +25,24 @@ router.post("/", async (req, res) => {
 });
 
 // list users
-router.get("/", async (req, res) => {
-  const allUser = await prisma.rider.findMany();
-  res.json(allUser);
-});
+// router.get("/", async (req, res) => {
+//   const allUser = await prisma.rider.findMany();
+//   res.json(allUser);
+// });
 
 //list one user
-// router.get('/:id', async (req, res) => {
-//     const {id} = req.params;
-//     try {
-//         const result = await prisma.user.findFirst({
-//             where: { id: Number(id) }
-//         });
-//         res.json(result);
-//     } catch (e) {
-//         res.status(400).json({error: "Use correct id"})
-//     }
-//     // res.status(501).json({error: `Not Implemented : ${id}` });
-// });
+router.get("/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const result = await prisma.rider.findFirst({
+      where: { email: email },
+    });
+    console.log(res.json(result));
+  } catch (e) {
+    res.status(400).json({ error: "Use correct email" });
+  }
+  // res.status(501).json({error: `Not Implemented : ${id}` });
+});
 
 // //update user
 // router.put('/:id', (req, res) => {

@@ -11,12 +11,13 @@ datasource db {
 }
 
 model Rider {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  email    String @unique
-  name     String
-  username String
-  password String
-  rides    Ride[]
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  email        String  @unique
+  name         String
+  username     String
+  password     String
+  confirmEmail String? @default("N")
+  rides        Ride[]
 }
 
 model Ride {
